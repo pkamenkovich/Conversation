@@ -12,8 +12,6 @@ module.exports.run = async (bot, message, args) => {
         userCheck = message.author;
     }
 
-    message.channel.send(`Fetching profile of ${userCheck}`);
-
     if (!bot.profiles[userCheck.id]) {
 
         bot.profiles[userCheck.id] = {
@@ -28,7 +26,14 @@ module.exports.run = async (bot, message, args) => {
         if (err) throw err;
     });
 
-    if (args[0]) {
+    if(args[0] === 'edit'){
+        let collector = await new Discord.ReactionCollector(message,null,[1,1,1]);
+        message.channel.send('Collector created');
+    }
+    else{
+
+        message.channel.send(`Fetching profile of ${userCheck}`);
+
         let embed = await new Discord.RichEmbed()
             .setThumbnail(message.author.avatarURL)
             .setColor("#0066cc")

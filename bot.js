@@ -44,8 +44,8 @@ bot.on("ready", async ()=> {
                 delete bot.mutes[i];
 
                 fs.writeFile("./mutes.json", JSON.stringify(bot.mutes), err => {
-                    if(err) throw err;
-                    console.log(`${member.user} has been unmuted.`)
+                if(err) throw err;
+                    console.log(`${member.user} has been unmuted.`);
                 });
             }
         }
