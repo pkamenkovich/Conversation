@@ -8,8 +8,6 @@ module.exports.run = async (bot, message, args) => {
     
         let jsFiles = files.filter(f => f.split(".").pop() === "js");
     });
-
-    message.delete();
 }
 
 module.exports.help = {
