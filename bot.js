@@ -25,7 +25,7 @@ fs.readdir("./cmds", (err, files) => {
     });
 });
 
-bot.on("ready", async () => {
+bot.on("ready", async ()=> {
     console.log(`Bot ${bot.user.username} is ready. Let the conversation begin`);
     console.log(bot.commands);
 
