@@ -6,6 +6,8 @@ module.exports.run = async (bot, message, args) => {
     let typeDice = parseInt(roll[1]);
     let result = 0;
     let resultSet = [""];
+    let finalString = "";
+    let total = 0;
 
     for (i = 0; i < numDice; i++) {
         switch (typeDice) {
@@ -17,7 +19,6 @@ module.exports.run = async (bot, message, args) => {
                 break;
             case 6:
                 result = Math.floor(Math.random() * 6) + 1;
-                console.log(result);
                 break;
             case 8:
                 result = Math.floor(Math.random() * 8) + 1;
@@ -37,7 +38,21 @@ module.exports.run = async (bot, message, args) => {
         }
         resultSet[i] = result;
     }
-    message.channel.send(resultSet);
+    
+    for (i = 0; i < resultSet.length; i++) {
+        finalString += resultSet[i] + " ";
+        total += resultSet[i];
+    }
+
+    let embed = await new Discord.RichEmbed()
+        .setColor("#0066cc")
+        .addField("User:", `${message.member}`, true)
+        .addField("Roll Used:", `${message.content}`, true)
+        .addField("Rolls:", `${finalString}`, true)
+        .addField("Total:", `${total}`, true)
+        .setFooter(`${bot.user.username} generation of ${message.author.username}'s roll.`);
+
+    message.channel.send({ embed: embed });
 }
 
 module.exports.help = {
