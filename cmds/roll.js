@@ -38,7 +38,7 @@ module.exports.run = async (bot, message, args) => {
         }
         resultSet[i] = result;
     }
-    
+
     for (i = 0; i < resultSet.length; i++) {
         finalString += resultSet[i] + " ";
         total += resultSet[i];
@@ -49,8 +49,8 @@ module.exports.run = async (bot, message, args) => {
         .addField("User:", `${message.member}`, true)
         .addField("Roll Used:", `${message.content}`, true)
         .addField("Rolls:", `${finalString}`, true)
-        .addField("Total:", `${total}`, true)
-        .setFooter(`${bot.user.username} generation of ${message.author.username}'s roll.`);
+        .addField("Total:", `${total}`)
+        .setFooter(`${bot.user.username}'s generation of ${message.author.username}'s roll.`);
 
     message.channel.send({ embed: embed });
 }
