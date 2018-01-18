@@ -1,11 +1,11 @@
 {
   "name": "conversation",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple, all purpose bot.",
   "main": "bot.js",
   "dependencies": {
     "discord.io": "^2.5.3",
-    "discord.js": "^11.2.1",
+    "discord.js": "^11.3.0",
     "snekfetch": "^3.6.1",
     "winston": "^2.4.0"
   },

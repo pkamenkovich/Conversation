@@ -25,9 +25,10 @@ fs.readdir("./cmds", (err, files) => {
     });
 });
 
-bot.on("ready", async () => {
+bot.on("ready", async ()=> {
     console.log(`Bot ${bot.user.username} is ready. Let the conversation begin`);
     console.log(bot.commands);
+    bot.user.setStatus("dnd");
 
     //TIMED UNMUTE
     bot.setInterval(() => {
@@ -45,8 +46,8 @@ bot.on("ready", async () => {
                 delete bot.mutes[i];
 
                 fs.writeFile("./mutes.json", JSON.stringify(bot.mutes), err => {
-                    if(err) throw err;
-                    console.log(`${member.user} has been unmuted.`)
+                if(err) throw err;
+                    console.log(`${member.user} has been unmuted.`);
                 });
             }
         }
