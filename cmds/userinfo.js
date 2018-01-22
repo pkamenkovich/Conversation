@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
     //If not mentioned / ID'd, display own or say invalid if get() == null
     if (!userCheck) {
         if (message.guild.members.get(args[0])) {
-            return message.channel.send(`${message.author}, this is not a valid user. Try again.`);
+            return message.channel.send(`Not a valid user. Try again.`);
         }
         userCheck = message.author;
     }
