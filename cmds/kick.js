@@ -10,6 +10,8 @@ module.exports.run = async (bot, message, args) => {
     if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")){
         return message.channel.send("You do not have the correct permissions to perform this action.");
     }
+
+    toKick.kick();
 }
 
 module.exports.help = {
