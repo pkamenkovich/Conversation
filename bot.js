@@ -29,7 +29,7 @@ bot.on("ready", async ()=> {
     console.log(`Bot ${bot.user.username} is ready. Let the conversation begin`);
     console.log(bot.commands);
     bot.user.setStatus('dnd');
-    bot.user.setPresence(
+    bot.user.setPresence({
         game: {
             name: 'the server',
             type: 'LISTENING'
