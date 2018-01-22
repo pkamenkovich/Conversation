@@ -28,7 +28,14 @@ fs.readdir("./cmds", (err, files) => {
 bot.on("ready", async ()=> {
     console.log(`Bot ${bot.user.username} is ready. Let the conversation begin`);
     console.log(bot.commands);
-    bot.user.setStatus("dnd");
+    bot.user.setStatus('dnd');
+    bot.user.setPresence({
+        status: 'dnd',
+        game: {
+            name: 'the server',
+            type: 'LISTENING'
+        }
+    });
 
     //TIMED UNMUTE
     bot.setInterval(() => {
