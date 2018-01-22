@@ -45,6 +45,7 @@ bot.on("ready", async ()=> {
             let guild = bot.guilds.get(guildID);
             let member = guild.members.get(i);
             let mutedRole = guild.roles.find(r => r.name === "Muted");
+
             if(!mutedRole || !guild) continue;
 
             if(Date.now() > time){
