@@ -4,7 +4,7 @@ const fs = module.require('fs');
 module.exports.run = async (bot, message, args) => {
 
     let userCheck = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    //If not mentioned / ID'd, display own or say invalid if get() == null
+
     if (!userCheck) {
         if (message.guild.members.get(args[0])) {
             return message.channel.send(`Not a valid user. Try again.`);
@@ -27,22 +27,41 @@ module.exports.run = async (bot, message, args) => {
     });
 
     if(args[0] === 'edit'){
-        let collector = await new Discord.ReactionCollector(message,null,[1,1,1]);
-        message.channel.send('Collector created');
+        switch(args[1]){
+            case('first'):
+                bot.profiles[userCheck.id].fName = args[2];
+            break;
+            case('last'):
+                bot.profiles[userCheck.id].lName = args[2];
+            break;
+            case('gender'):
+                bot.profiles[userCheck.id].gender = args[2];
+            break;
+            case('age'):
+                if(!parseInt(args[2])) return message.channel.send("Age is a number");
+                bot.profiles[userCheck.id].age = args[2];
+            break;
+            case('about'):
+                bot.profiles[userCheck.id].about = stringify(args[2]);
+            break;
+            default:
+                return message.channel.send("Invalid option, try again");
+            break;
+        }
     }
     else{
 
         message.channel.send(`Fetching profile of ${userCheck}`);
 
         let embed = await new Discord.RichEmbed()
-            .setThumbnail(message.author.avatarURL)
+            .setThumbnail(message.mentions.users.first().avatarURL)
             .setColor("#0066cc")
             .addField("First Name:", `${bot.profiles[userCheck.id].fName}`, true)
             .addField("Last Name:", `${bot.profiles[userCheck.id].lName}`, true)
             .addField("Gender:", `${bot.profiles[userCheck.id].gender}`, true)
             .addField("Age:", `${bot.profiles[userCheck.id].age}`, true)
             .addField("About Me:", `${bot.profiles[userCheck.id].about}`)
-            .setFooter(`${bot.user.username}'s profile of ${message.author.username}`);
+            .setFooter(`${bot.user.username}'s profile of ${message.mentions.users.first().username}`);
 
         message.channel.send({ embed: embed });
     }
