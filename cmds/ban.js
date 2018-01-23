@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send("You do not have the correct permissions to perform this action.");
     }
 
-    toBan.ban();
+    toBan.ban(args[1]);
 }
 
 module.exports.help = {
