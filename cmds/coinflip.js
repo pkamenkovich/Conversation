@@ -7,15 +7,27 @@ module.exports.run = async (bot, message, args) => {
     for(i = 0; i < iterations; i ++){
         var result = Math.random();
         if(result < 0.5){
-            message.channel.send("Heads");
+            resultSet[i] = "Heads";
         }
         else if(result >= 0.5){
-            message.channel.send("Tails");
+            resultSet[i] = "Tails";
         }
         else {
             return message.channel.send("Error!");
         }
     }
+
+    var heads = resultSet.filter(flip => flip === 'Heads');
+    var tails = resultSet.filter(flip => flip === 'Tails');
+
+    let totals = await new Discord.RichEmbed()
+        .setThumbnail(bot.user.avatarURL)
+        .setTitle("Coinflip results")
+        .addField("Heads:",`${heads.length}`)
+        .addField("Tails:",`${tails.length}`)
+        .addField("Total:", `${iterations}`);
+    
+    message.channel.send({ embed: totals});
 }
 
 module.exports.help = {
