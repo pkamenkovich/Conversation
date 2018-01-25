@@ -31,8 +31,8 @@ module.exports.run = async (bot, message, args) => {
             .addField("rng number", `Generates a number between 0 and the number mentioned.`)
             .addField("roll #d#", `Generates a dice roll, the first argument is the number of dice, the second number is how many sides the dice has.`)
             .addField("roll stats", `Creates a 4d6 dice roll, six times. Useful for character creation for DND campaigns.`)
-            .addField("coinflip", `Flips a coin`)
-            .setFooter(`${bot.user.username}'s list of moderation commands.`);
+            .addField("coinflip number", `Flips a coin any number of times, will only flip once if no number is mentioned.`)
+            .setFooter(`${bot.user.username}'s list of rng commands.`);
 
     message.channel.send({ embed: moderation });
 }
