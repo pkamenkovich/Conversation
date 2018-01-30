@@ -75,4 +75,13 @@ bot.on("message", async message => {
 
 });
 
+bot.on("guildCreate", async member => {
+    const channel = member.guild.channels.find('name', 'conversation');
+
+    if (!channel) return;
+        member.guild.createChannel('conversation','text');
+
+    channel.send('This is a test');
+});
+
 bot.login(botsettings.token);
