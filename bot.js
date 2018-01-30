@@ -69,13 +69,14 @@ bot.on("message", async message => {
     let args = messageArray.slice(1);
 
     if(!command.startsWith(prefix)) return;
+    if(command.endsWith('commands')) return message.channel.send("If you need to see the commands, take a gander at the 'conversation' text channel!");
 
     let cmd = bot.commands.get(command.slice(prefix.length));
     if(cmd) cmd.run(bot,message,args);
 
 });
 
-bot.on("guildCreate", async (member) => {
+bot.on("guildCreate", async (member,message) => {
     let latest = 0;
     bot.guilds.forEach(async (guild, id)=>{
         let membership = guild.members.find('id', botsettings.id);
@@ -92,7 +93,7 @@ bot.on("guildCreate", async (member) => {
     }
     let createdChannel = joinedGuild.channels.find('name','conversation');
     member.channel = createdChannel;
-    member.channel.send('Test');
+    bot.commands.get('commands').run(bot,createdChannel);
     console.log(`bot joined ${bot.guilds.find('id', botsettings.lastJoined)} ${botsettings.lastJoined}`);
 });
 

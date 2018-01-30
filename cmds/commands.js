@@ -1,14 +1,14 @@
 const Discord = module.require('discord.js');
 const fs = module.require('fs');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot,channel) => {
 
     let intro = await new Discord.RichEmbed()
         .setThumbnail(bot.user.avatarURL)
         .setTitle("Conversation Commands")
         .setDescription("Use the prefix c! before each command to trigger the bot. There are currently two subsections.");
     
-    message.channel.send({ embed: intro});
+    channel.send({ embed: intro});
 
     //MODERATION COMMANDS
     let moderation = await new Discord.RichEmbed()
@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
             .addField("unmute @mention", `Unmutes the user mentioned.`)
             .setFooter(`${bot.user.username}'s list of moderation commands.`);
 
-    message.channel.send({ embed: moderation });
+    channel.send({ embed: moderation });
 
     //RNG COMMANDS
     let rng = await new Discord.RichEmbed()
@@ -34,7 +34,7 @@ module.exports.run = async (bot, message, args) => {
             .addField("coinflip number", `Flips a coin any number of times, will only flip once if no number is mentioned.`)
             .setFooter(`${bot.user.username}'s list of rng commands.`);
 
-    message.channel.send({ embed: moderation });
+    channel.send({ embed: moderation });
 }
 
 module.exports.help = {
