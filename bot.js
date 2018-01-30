@@ -35,7 +35,7 @@ bot.on("ready", async ()=> {
             type: 'LISTENING'
         }
     });
-
+    //console.log(bot.guilds);
     //TIMED UNMUTE
     bot.setInterval(() => {
         for(let i in bot.mutes) {
@@ -75,13 +75,25 @@ bot.on("message", async message => {
 
 });
 
-bot.on("guildCreate", async member => {
-    const channel = member.guild.channels.find('name', 'conversation');
-
-    if (!channel) return;
-        member.guild.createChannel('conversation','text');
-
-    channel.send('This is a test');
+bot.on("guildCreate", async (member) => {
+    let latest = 0;
+    bot.guilds.forEach(async (guild, id)=>{
+        let membership = guild.members.find('id', botsettings.id);
+        if(membership.joinedAt > latest){
+            latest = membership.joinedAt;
+            botsettings.lastJoined = membership.guild.id;
+        }
+    });
+    //If the bot does not find the channel 'conversation' in the new guild
+    //create the new channel, then send a message through that channel to display commands
+    let joinedGuild = bot.guilds.find('id', botsettings.lastJoined);
+    if(!joinedGuild.channels.find('name','conversation')){
+        joinedGuild.createChannel('conversation','text');
+    }
+    let createdChannel = joinedGuild.channels.find('name','conversation');
+    member.channel = createdChannel;
+    member.channel.send('Test');
+    console.log(`bot joined ${bot.guilds.find('id', botsettings.lastJoined)} ${botsettings.lastJoined}`);
 });
 
 bot.login(botsettings.token);
