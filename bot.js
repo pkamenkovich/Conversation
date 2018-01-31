@@ -107,7 +107,7 @@ bot.on("guildCreate", async (member,message) => {
         SEND_MESSAGES: false, 
         MANAGE_MESSAGES: false, 
         ATTACH_FILES: false
-    })
+    });
 });
 
 bot.login(botsettings.token);
