@@ -35,7 +35,7 @@ bot.on("ready", async ()=> {
             type: 'LISTENING'
         }
     });
-    //console.log(bot.guilds);
+    
     //TIMED UNMUTE
     bot.setInterval(() => {
         for(let i in bot.mutes) {
@@ -52,8 +52,8 @@ bot.on("ready", async ()=> {
                 delete bot.mutes[i];
 
                 fs.writeFile("./mutes.json", JSON.stringify(bot.mutes), err => {
-                if(err) throw err;
-                    console.log(`${member.user} has been unmuted.`);
+                    if(err) throw err;
+                    //console.log(`${member.user} has been unmuted.`);
                 });
             }
         }
@@ -102,11 +102,12 @@ bot.on("guildCreate", async (member) => {
     bot.commands.get('commands').run(bot,createdChannel);
 
     //Alter permissions to be read-only for everyone.
-    // member.channel.overwritePermissions('everyone',{
-    //     SEND_MESSAGES: false, 
-    //     MANAGE_MESSAGES: false, 
-    //     ATTACH_FILES: false
-    // });
+    await createdChannel.overwritePermissions('everyone',{
+        SEND_MESSAGES: false, 
+        MANAGE_MESSAGES: false, 
+        ATTACH_FILES: false,
+        ADD_REACTIONS: false
+    });
 });
 
 bot.login(botsettings.token);
