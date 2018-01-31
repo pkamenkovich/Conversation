@@ -54,14 +54,14 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send(`Fetching profile of ${userCheck}`);
 
         let embed = await new Discord.RichEmbed()
-            .setThumbnail(message.mentions.users.first().avatarURL)
+            .setThumbnail(userCheck.avatarURL)
             .setColor("#0066cc")
             .addField("First Name:", `${bot.profiles[userCheck.id].fName}`, true)
             .addField("Last Name:", `${bot.profiles[userCheck.id].lName}`, true)
             .addField("Gender:", `${bot.profiles[userCheck.id].gender}`, true)
             .addField("Age:", `${bot.profiles[userCheck.id].age}`, true)
             .addField("About Me:", `${bot.profiles[userCheck.id].about}`)
-            .setFooter(`${bot.user.username}'s profile of ${message.mentions.users.first().username}`);
+            .setFooter(`${bot.user.username}'s profile of ${userCheck.username}`);
 
         message.channel.send({ embed: embed });
     }

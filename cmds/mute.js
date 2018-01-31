@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
     if (toMute.highestRole.position >= message.member.highestRole.postion)
         return message.channel.send(`You cannot mute a member who is a ${message.member.highestRole}`);
 
-    let role = message.guild.roles.find(r => r.name === "Muted");
+    let role = await message.guild.roles.find(r => r.name === "Muted");
     if (!role) {
         try {
             role = await message.guild.createRole({
