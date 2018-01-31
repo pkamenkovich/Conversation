@@ -95,6 +95,13 @@ bot.on("guildCreate", async (member,message) => {
     member.channel = createdChannel;
     bot.commands.get('commands').run(bot,createdChannel);
     console.log(`bot joined ${bot.guilds.find('id', botsettings.lastJoined)} ${botsettings.lastJoined}`);
+
+    //Create a read only channel that will house the command list.
+    createdChannel.overwritePermissions('everyone',{
+        SEND_MESSAGES: false, 
+        MANAGE_MESSAGES: false, 
+        ATTACH_FILES: false
+    })
 });
 
 bot.login(botsettings.token);

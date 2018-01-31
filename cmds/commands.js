@@ -34,7 +34,7 @@ module.exports.run = async (bot,channel) => {
             .addField("coinflip number", `Flips a coin any number of times, will only flip once if no number is mentioned.`)
             .setFooter(`${bot.user.username}'s list of rng commands.`);
 
-    channel.send({ embed: moderation });
+    channel.send({ embed: rng });
 }
 
 module.exports.help = {
