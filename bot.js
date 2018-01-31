@@ -76,7 +76,7 @@ bot.on("message", async message => {
 
 });
 
-bot.on("guildCreate", async (member,message) => {
+bot.on("guildCreate", async (member) => {
 
     let latest = 0;
 
@@ -92,22 +92,21 @@ bot.on("guildCreate", async (member,message) => {
     let joinedGuild = bot.guilds.find('id', botsettings.lastJoined);
     //If the bot does not find the channel 'conversation' in the new guild
     //create the new channel, then send a message through that channel to display commands
-    
+    let createdChannel = null;
     if(!joinedGuild.channels.find('name','conversation')){
-        joinedGuild.createChannel('conversation','text');
+        createdChannel = await joinedGuild.createChannel('conversation','text');
     }
-
-    let createdChannel = joinedGuild.channels.find('name','conversation');
-
-    member.channel = createdChannel;
+    else {
+        createdChannel = joinedGuild.channels.find('name','conversation');
+    }
     bot.commands.get('commands').run(bot,createdChannel);
 
     //Alter permissions to be read-only for everyone.
-    createdChannel.overwritePermissions('everyone',{
-        SEND_MESSAGES: false, 
-        MANAGE_MESSAGES: false, 
-        ATTACH_FILES: false
-    });
+    // member.channel.overwritePermissions('everyone',{
+    //     SEND_MESSAGES: false, 
+    //     MANAGE_MESSAGES: false, 
+    //     ATTACH_FILES: false
+    // });
 });
 
 bot.login(botsettings.token);
