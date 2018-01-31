@@ -77,7 +77,10 @@ bot.on("message", async message => {
 });
 
 bot.on("guildCreate", async (member,message) => {
+
     let latest = 0;
+
+    //Loop through all the guilds, find the guild that was just joined.
     bot.guilds.forEach(async (guild, id)=>{
         let membership = guild.members.find('id', botsettings.id);
         if(membership.joinedAt > latest){
@@ -85,18 +88,21 @@ bot.on("guildCreate", async (member,message) => {
             botsettings.lastJoined = membership.guild.id;
         }
     });
+
+    let joinedGuild = bot.guilds.find('id', botsettings.lastJoined);
     //If the bot does not find the channel 'conversation' in the new guild
     //create the new channel, then send a message through that channel to display commands
-    let joinedGuild = bot.guilds.find('id', botsettings.lastJoined);
+    
     if(!joinedGuild.channels.find('name','conversation')){
         joinedGuild.createChannel('conversation','text');
     }
+
     let createdChannel = joinedGuild.channels.find('name','conversation');
+
     member.channel = createdChannel;
     bot.commands.get('commands').run(bot,createdChannel);
-    console.log(`bot joined ${bot.guilds.find('id', botsettings.lastJoined)} ${botsettings.lastJoined}`);
 
-    //Create a read only channel that will house the command list.
+    //Alter permissions to be read-only for everyone.
     createdChannel.overwritePermissions('everyone',{
         SEND_MESSAGES: false, 
         MANAGE_MESSAGES: false, 
