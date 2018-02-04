@@ -110,4 +110,4 @@ bot.on("guildCreate", async (member) => {
     });
 });
 
-bot.login(botsettings.token);
+bot.login(process.env.BOT_TOKEN);
