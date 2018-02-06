@@ -14,11 +14,12 @@ module.exports.run = async (bot,channel) => {
     let moderation = await new Discord.RichEmbed()
             .setThumbnail(bot.user.avatarURL)
             .setTitle("Moderation")
-            .setColor("#0066cc")
+            .setColor("#990000")
             .addField("ban @mention reason", `Bans the user mentioned.`)
             .addField("kick @mention reason", `Kicks the user mentioned.`)
             .addField("mute @mention time(seconds)", `Mutes the user mentioned for duration provided, or indefinite if time is empty.`)
             .addField("unmute @mention", `Unmutes the user mentioned.`)
+            .addField("nickname @mention", `Change the username of a user mentioned.`)
             .setFooter(`${bot.user.username}'s list of moderation commands.`);
 
     channel.send({ embed: moderation });
