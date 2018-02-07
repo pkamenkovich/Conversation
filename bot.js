@@ -85,7 +85,7 @@ bot.on("guildCreate", async (member) => {
         let membership = guild.members.find('id', botsettings.id);
         if(membership.joinedAt > latest){
             latest = membership.joinedAt;
-            botsettings.lastJoined = membership.guild.id;
+            botsettings.lastJoined = stringify(membership.guild.id);
         }
     });
 
